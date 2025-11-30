@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j // Логування (вимога методички)
+@Slf4j // Логування
 public class MainController {
 
     private final ShopRepository shopRepository;
