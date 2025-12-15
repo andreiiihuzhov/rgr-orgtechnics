@@ -1,0 +1,30 @@
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      # Назва бази даних, до якої підключається Java
+      MYSQL_DATABASE: rgr_orgtechnics
+      # Пароль для root користувача
+      MYSQL_ROOT_PASSWORD: root
+      # Створюємо користувача, який прописаний у вас в application.properties
+      MYSQL_USER: root123
+      MYSQL_PASSWORD: root123
+    ports:
+      # Прокидаємо стандартний порт MySQL
+      - '3306:3306'
+    networks:
+      - ds-network
+    volumes:
+      - mysql-data:/var/lib/mysql
+    # Перевірка здоров'я для MySQL (опціонально, але корисно)
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+networks:
+  ds-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
